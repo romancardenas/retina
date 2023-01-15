@@ -1,0 +1,60 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug device STM32F446RE",
+        "cwd": "${workspaceRoot}", 
+        "executable": "${workspaceFolder}/output/${workspaceFolderBasename}.elf",
+        "request": "launch",
+        "args": [],
+        "stopAtEntry": true,
+        "type": "cortex-debug",
+        "servertype": "openocd",
+        "device": "STM32F446RE",        
+        "configFiles": [
+          "port/nucleo_stm32f446re/openocd.cfg"
+        ],
+        "preLaunchTask": "Clean & Re-Build NUCLEO_STM32F446RE",
+        "svdFile": "../../svd/STM32F446.svd",
+        "swoConfig": {
+          "enabled": true,
+          "cpuFrequency": 16000000,
+          "swoFrequency": 2000000,
+          "source": "probe",
+          "decoders": [
+            {
+              "type": "console",
+              "label": "ITM",
+              "port": 0
+            }
+          ]
+        },
+      },
+      {
+        "name": "Debug PC",
+        "type": "cppdbg", 
+        "request": "launch",
+        "args": [],
+        "stopAtEntry": true,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "externalConsole": false,
+        "linux": {
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb",
+            "program": "${workspaceFolder}/output/${workspaceFolderBasename}"
+        },
+        "osx": {
+            "MIMode": "lldb",
+            "miDebuggerPath": "lldb-mi",
+            "program": "${workspaceFolder}/output/${workspaceFolderBasename}"
+        },
+        "windows": {
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb.exe",
+            "program": "${workspaceFolder}/output/${workspaceFolderBasename}.exe"
+        },
+        "preLaunchTask": "Clean & Re-Build PC"
+    }
+    ]
+}

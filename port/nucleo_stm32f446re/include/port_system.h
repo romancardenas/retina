@@ -190,7 +190,7 @@ void port_system_gpio_config_alternate(GPIO_TypeDef *port, uint8_t pin, uint8_t 
  *
  * @param port Port of the GPIO (CMSIS struct like)
  * @param pin Pin/line of the GPIO (index from 0 to 15)
- * @param mode Trigger mode can be a combination (OR) of: (i) direction: rising edge (0x01), falling edge (0x02), (ii)  interruption request (0x04), or (iii) event request: .
+ * @param mode Trigger mode can be a combination (OR) of: (i) direction: rising edge (0x01), falling edge (0x02), (ii)  event request (0x04), or (iii) interruption request (0x08).
  * @retval None
  */
 void port_system_gpio_config_exti(GPIO_TypeDef *port, uint8_t pin, uint32_t mode);

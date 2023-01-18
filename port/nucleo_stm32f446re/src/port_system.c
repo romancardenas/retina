@@ -131,10 +131,30 @@ void port_system_delay_ms(uint32_t ms)
   }
 }
 
+void port_system_delay_until_ms(uint32_t *p_t, uint32_t ms)
+{
+  uint32_t until = *p_t + ms;
+  uint32_t now = port_system_get_millis();
+  if (until > now)
+  {
+    port_system_delay_ms(until - now);
+  }
+  *p_t = port_system_get_millis();
+}
+
 //------------------------------------------------------
 // GPIO RELATED FUNCTIONS
 //------------------------------------------------------
+void port_system_gpio_exti_enable(uint8_t pin, uint8_t priority, uint8_t subpriority)
+{
+  NVIC_SetPriority(GET_PIN_IRQN(pin), NVIC_EncodePriority(NVIC_GetPriorityGrouping(), priority, subpriority));
+  NVIC_EnableIRQ(GET_PIN_IRQN(pin));
+}
 
+void port_system_gpio_exti_disable(uint8_t pin)
+{  
+  NVIC_EnableIRQ(GET_PIN_IRQN(pin));
+}
 
 //------------------------------------------------------
 // INTERRUPT SERVICE ROUTINES

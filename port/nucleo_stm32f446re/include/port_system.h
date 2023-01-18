@@ -21,11 +21,12 @@
 /* Defines */
 #define BIT_POS_TO_MASK(x) (0x01 << x)  /*!< Convert the index of a bit into a mask by left shifting */
 #define BASE_MASK_TO_POS(m, p) (m << p) /*!< Move a mask defined in the LSBs to upper positions by shifting left p bits */
+#define GET_PIN_IRQN(pin) (pin >= 10 ? EXTI15_10_IRQn : (pin >= 5 ? EXTI9_5_IRQn : (EXTI0_IRQn + pin))) /*!< Compute the IRQ number associated to a GPIO pin */
 
 /* Microcontroller STM32F446RE */
 /* Timer configuration */
-#define RCC_HSI_CALIBRATION_DEFAULT 0x10U /*!< Default HSI calibration trimming value */
-#define TICK_FREQ_1KHZ 1U /*!< Freqency in kHz of the System tick */
+#define RCC_HSI_CALIBRATION_DEFAULT 0x10U            /*!< Default HSI calibration trimming value */
+#define TICK_FREQ_1KHZ 1U                            /*!< Freqency in kHz of the System tick */
 #define NVIC_PRIORITY_GROUP_0 ((uint32_t)0x00000007) /*!< 0 bit  for pre-emption priority, \
                                                          4 bits for subpriority */
 #define NVIC_PRIORITY_GROUP_4 ((uint32_t)0x00000003) /*!< 4 bits for pre-emption priority, \
@@ -88,6 +89,18 @@ uint32_t port_system_get_millis(void);
  * @retval None
  */
 void port_system_delay_ms(uint32_t ms);
+
+/**
+ * @brief Wait for some milliseconds from a time reference.
+ *
+ * @note It also updates the time reference to the system time at return.
+ *
+ * @param p_t Pointer to the time reference
+ * @param ms Number of milliseconds to wait
+ *
+ * @retval None
+ */
+void port_system_delay_until_ms(uint32_t *p_t, uint32_t ms);
 
 /** @verbatim
       ==============================================================================
@@ -190,10 +203,30 @@ void port_system_gpio_config_alternate(GPIO_TypeDef *port, uint8_t pin, uint8_t 
  *
  * @param port Port of the GPIO (CMSIS struct like)
  * @param pin Pin/line of the GPIO (index from 0 to 15)
- * @param mode Trigger mode can be a combination (OR) of: (i) direction: rising edge (0x01), falling edge (0x02), (ii)  event request (0x04), or (iii) interruption request (0x08).
+ * @param mode Trigger mode can be a combination (OR) of: (i) direction: rising edge (0x01), falling edge (0x02), (ii)  event request (0x04), or (iii) interrupt request (0x08).
  * @retval None
  */
 void port_system_gpio_config_exti(GPIO_TypeDef *port, uint8_t pin, uint32_t mode);
+
+/**
+ * @brief Enable interrupts of a GPIO line (pin)
+ *
+ * @param pin Pin/line of the GPIO (index from 0 to 15)
+ * @param priority Priority level (from highest priority: 0, to lowest priority: 15)
+ * @param subpriority Subpriority level (from highest priority: 0, to lowest priority: 15)
+ *
+ * @retval None
+ */
+void port_system_gpio_exti_enable(uint8_t pin, uint8_t priority, uint8_t subpriority);
+
+/**
+ * @brief Disable interrupts of a GPIO line (pin)
+ *
+ * @param pin Pin/line of the GPIO (index from 0 to 15)
+ *
+ * @retval None
+ */
+void port_system_gpio_exti_disable(uint8_t pin);
 
 /**
  * @brief Read the digital value of a GPIO
@@ -223,7 +256,7 @@ bool port_system_gpio_read(GPIO_TypeDef *port, uint8_t pin);
  * > \n
  * > ✅ 2. **Write the opposite value in the GPIO.** \n
  * > &nbsp;&nbsp;&nbsp;&nbsp;💡 You might use functions `port_system_gpio_read()` and `port_system_gpio_write()` to help you. \n
- * > &nbsp;&nbsp;&nbsp;&nbsp;💡 You might use the macros `HIGH` and `LOW`. \n 
+ * > &nbsp;&nbsp;&nbsp;&nbsp;💡 You might use the macros `HIGH` and `LOW`. \n
  * @param port Port of the GPIO (CMSIS struct like)
  * @param pin Pin/line of the GPIO (index from 0 to 15)
  *

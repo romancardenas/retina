@@ -265,13 +265,15 @@ bool port_system_gpio_read(GPIO_TypeDef *port, uint8_t pin);
 void port_system_gpio_toggle(GPIO_TypeDef *port, uint8_t pin);
 
 /**
- * @brief Write a digital value in a GPIO
+ * @brief Write a digital value in a GPIO atomically
  *
  * > **TO-DO alumnos:**
  * >
- * > ✅ 1. **Set or clean the corresponding bit value of the ODR register** depending on the given `value`. \n
+ * > ✅ 1. **Set the corresponding bit value of the BSRR register** to *set* or *reset* the output depending on the given `value`. \n
  * > &nbsp;&nbsp;&nbsp;&nbsp;💡 You might use the macros `HIGH` and `LOW`. \n
  * > &nbsp;&nbsp;&nbsp;&nbsp;💡 You might use the `BIT_POS_TO_MASK(pin)` macro. \n
+ * 
+ * @note You can use a +16 offset on the pin index and use the `BIT_POS_TO_MASK(pin)` macro to get the mask when you go to clear a GPIO. Otherwise, you can calculate the pin mask first and then use a 16-position left shift of the mask. 
  *
  * @param port Port of the GPIO (CMSIS struct like)
  * @param pin Pin/line of the GPIO (index from 0 to 15)

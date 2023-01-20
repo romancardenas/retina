@@ -9,6 +9,10 @@
 #include "fsm_button.h"
 #include "port_button.h"
 
+/* Typedefs --------------------------------------------------------------------*/
+
+/* Defines and enums ----------------------------------------------------------*/
+/* Enums */
 
 /* State machine input or transition functions */
 

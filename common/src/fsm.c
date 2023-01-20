@@ -1,53 +1,59 @@
-/*
- * fsm.c
+/**
+ * @file fsm.c
+ * @brief Library to create Finite State Machines using composition.
  *
- *  Created on: 1 de mar. de 2016
- *      Author: Administrador
+ * This library is expected to be used using composition
+ * @author Teachers from the Departamento de Ingeniería Electrónica. Original authors: José M. Moya and Pedro J. Malagón. Latest contributor: Román Cárdenas.
+ * @date 2023-01-01
  */
 
+/* Includes ------------------------------------------------------------------*/
+/* Standard C includes */
 #include <stdlib.h>
+
+/* Other includes */
 #include "fsm.h"
 
-fsm_t*
-fsm_new (fsm_trans_t* tt)
+fsm_t *fsm_new(fsm_trans_t *p_tt)
 {
-  if (!tt) {
+  if (!p_tt)
+  {
     return NULL;
   }
-  if ((tt->orig_state == -1) || (tt->in == NULL) || (tt->dest_state == -1)) {
+  if ((p_tt->orig_state == -1) || (p_tt->in == NULL) || (p_tt->dest_state == -1))
+  {
     return NULL;
   }
-  fsm_t* f = (fsm_t*) malloc (sizeof (fsm_t));
-  fsm_init (f, tt);
-  return f;
+  fsm_t *p_fsm = (fsm_t *)malloc(sizeof(fsm_t));
+  fsm_init(p_fsm, p_tt);
+  return p_fsm;
 }
 
-void
-fsm_init (fsm_t* f, fsm_trans_t* tt)
+void fsm_init(fsm_t *p_fsm, fsm_trans_t *p_tt)
 {
-  if (tt != NULL) {
-    f->tt = tt;
-    f->current_state = tt[0].orig_state;
+  if (p_tt != NULL)
+  {
+    p_fsm->p_tt = p_tt;
+    p_fsm->current_state = p_tt->orig_state;
   }
 }
 
-void
-fsm_destroy (fsm_t* f)
+void fsm_destroy(fsm_t *p_fsm)
 {
-  free(f);
+  free(p_fsm);
 }
 
-void
-fsm_fire (fsm_t* f)
+void fsm_fire(fsm_t *p_fsm)
 {
-  fsm_trans_t* t;
-  for (t = f->tt; t->orig_state >= 0; ++t) {
-    if ((f->current_state == t->orig_state) && t->in(f)) {
-      f->current_state = t->dest_state;
-      if (t->out)
-        t->out(f);
+  fsm_trans_t *p_t;
+  for (p_t = p_fsm->p_tt; p_t->orig_state >= 0; ++p_t)
+  {
+    if ((p_fsm->current_state == p_t->orig_state) && p_t->in(p_fsm))
+    {
+      p_fsm->current_state = p_t->dest_state;
+      if (p_t->out)
+        p_t->out(p_fsm);
       break;
     }
   }
 }
-

@@ -1,6 +1,6 @@
 /**
  * @file fsm.h
- * @brief Header for retina.c file.
+ * @brief Header for fsm.c file.
  * @author Teachers from the Departamento de Ingeniería Electrónica. Original authors: José M. Moya and Pedro J. Malagón. Latest contributor: Román Cárdenas.
  * @date 2023-01-01
  */

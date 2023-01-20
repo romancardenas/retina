@@ -53,7 +53,7 @@ void SystemInit(void)
  * @note This function starts a system timer that generates a SysTick every 1 ms.
  * @retval None
  */
-void system_clock_config(void)
+static void system_clock_config(void)
 {
   /** Configure the main internal regulator output voltage */
   /* Power controller (PWR) */

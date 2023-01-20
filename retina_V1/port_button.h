@@ -14,7 +14,7 @@
 #include <stdbool.h>
 
 /* HW dependent includes */
-#include "port_system.h"
+
 
 /* Defines and enums ----------------------------------------------------------*/
 /* Defines */

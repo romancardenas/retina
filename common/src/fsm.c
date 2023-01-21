@@ -16,7 +16,7 @@
 
 fsm_t *fsm_new(fsm_trans_t *p_tt)
 {
-  if (!p_tt != NULL)
+  if (p_tt == NULL)
   {
     return NULL;
   }

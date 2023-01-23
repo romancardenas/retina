@@ -12,7 +12,7 @@
 #define HSI_VALUE ((uint32_t)16000000) /*!< Value of the Internal oscillator in Hz */
 
 /* GLOBAL VARIABLES */
-static uint32_t msTicks = 0; /*!< Variable to store millisecond ticks */
+static volatile uint32_t msTicks = 0; /*!< Variable to store millisecond ticks */
 
 /* These variables are declared extern in CMSIS (system_stm32f4xx.h) */
 uint32_t SystemCoreClock = HSI_VALUE; /*!< Frequency of the System clock */

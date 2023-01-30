@@ -118,12 +118,21 @@ $(OUTPUT)/%.bin: $(OUTPUT)/%$(EXT) | $(OUTPUT)
 # flash
 #######################################
 flash: $(OUTPUT)/$(TARGET)$(EXT)
+	ifeq ($(OS),Windows_NT)
+	"C:/Program Files/openocd/bin/openocd.exe" -f $(PORT)/$(PLATFORM)/openocd.cfg -c "program $< verify reset exit"
+	else
 	"openocd" -f $(PORT)/$(PLATFORM)/openocd.cfg -c "program $< verify reset exit"
-
+	endif
+	
 #######################################
 # erase
 #######################################
 erase:
+	ifeq ($(OS),Windows_NT)
+	"C:/Program Files/openocd/bin/openocd.exe" -f $(PORT)/$(PLATFORM)/openocd.cfg -c "init; reset halt; stm32f4x mass_erase 0; exit"
+	else
 	"openocd" -f $(PORT)/$(PLATFORM)/openocd.cfg -c "init; reset halt; stm32f4x mass_erase 0; exit"
+	endif
+	
 
 .PHONY: bin flash erase

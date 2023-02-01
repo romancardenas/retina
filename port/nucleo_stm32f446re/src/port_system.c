@@ -153,7 +153,7 @@ void port_system_gpio_exti_enable(uint8_t pin, uint8_t priority, uint8_t subprio
 
 void port_system_gpio_exti_disable(uint8_t pin)
 {  
-  NVIC_EnableIRQ(GET_PIN_IRQN(pin));
+  NVIC_DisableIRQ(GET_PIN_IRQN(pin));
 }
 
 //------------------------------------------------------

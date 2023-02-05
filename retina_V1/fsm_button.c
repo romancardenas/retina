@@ -1,8 +1,9 @@
 /**
  * @file fsm_button.c
  * @brief Button FSM main file.
- * @author Sistemas Digitales II
- * @date 2023-01-01
+ * @author alumno1
+ * @author alumno2
+ * @date fecha
  */
 
 /* Includes ------------------------------------------------------------------*/
@@ -25,7 +26,7 @@
 
 fsm_t *fsm_button_new(uint32_t debounce_time, uint32_t button_id)
 {
-    fsm_t *p_fsm = malloc(sizeof(fsm_button_t)); /* Hago malloc para que reserve memoria de todo resto de cosas de la FSM, aunque lo interpreto como fsm_t (el primer elto de la estructura) */
+    fsm_t *p_fsm = malloc(sizeof(fsm_button_t)); /* Do malloc to reserve memory of all other FSM elements, although it is interpreted as fsm_t (the first element of the structure) */
     fsm_button_init(p_fsm, debounce_time, button_id);
     return p_fsm;
 }

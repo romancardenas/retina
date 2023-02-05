@@ -1,8 +1,9 @@
 /**
  * @file fsm_button.h
  * @brief Header for fsm_button.c file.
- * @author Sistemas Digitales II
- * @date 2023-01-01
+ * @author alumno1
+ * @author alumno2
+ * @date fecha
  */
 
 #ifndef FSM_BUTTON_H_
@@ -16,8 +17,6 @@
 /* Other includes */
 #include "fsm.h"
 
-
 /* Function prototypes and explanation -------------------------------------------------*/
-
 
 #endif

@@ -4,8 +4,9 @@
  *
  * This files defines an internal struct which coontains the HW information of the 
  *
- * @author Sistemas Digitales II
- * @date 2023-01-01
+ * @author alumno1
+ * @author alumno2
+ * @date fecha
  */
 
 /* Includes ------------------------------------------------------------------*/

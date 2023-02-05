@@ -1,9 +1,10 @@
 /**
  * @file port_button.h
  * @brief Header for port_button.c file.
- * @author Sistemas Digitales II
- * @date 2023-01-01
- */
+ * @author alumno1
+ * @author alumno2
+ * @date fecha
+ */ */
 
 #ifndef PORT_BUTTON_H_
 #define PORT_BUTTON_H_

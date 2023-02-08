@@ -12,7 +12,7 @@
 #define HSI_VALUE ((uint32_t)16000000) /*!< Value of the Internal oscillator in Hz */
 
 /* GLOBAL VARIABLES */
-static volatile uint32_t msTicks = 0; /*!< Variable to store millisecond ticks */
+static uint32_t msTicks = 0; /*!< Variable to store millisecond ticks. @warning **It must be declared volatile!** Just because it is modified in an ISR. **Add it to the definition** after *static*. */
 
 /* These variables are declared extern in CMSIS (system_stm32f4xx.h) */
 uint32_t SystemCoreClock = HSI_VALUE; /*!< Frequency of the System clock */
@@ -166,6 +166,9 @@ void port_system_gpio_exti_disable(uint8_t pin)
  * >
  * > ✅ 1. **Increment the System tick counter `msTicks` in 1 count.** \n
  * > &nbsp;&nbsp;&nbsp;&nbsp;💡 `msTicks` is a global `static` variable declared in @link port_system.c @endlink. \n
+ *
+ * @warning **The variable `msTicks` must be declared volatile!** Just because it is modified in this ISR, in order to avoid [*race conditions*](https://en.wikipedia.org/wiki/Race_condition)
+. **Add it to the definition** after *static*.
  *
  */
 void SysTick_Handler(void)

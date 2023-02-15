@@ -19,5 +19,11 @@
 
 /* Function prototypes and explanation ---------------------------------------*/
 
+/* TO-DO alumnos: documentation*/
+fsm_t *fsm_retina_new(fsm_t *p_fsm_button, uint32_t button_press_time, fsm_t *p_fsm_tx);
+
+/* TO-DO alumnos: documentation*/
+void fsm_retina_init(fsm_t *p_this, fsm_t *p_fsm_button, uint32_t button_press_time, fsm_t *p_fsm_tx);
+
 #endif
 

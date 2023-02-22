@@ -19,8 +19,8 @@
 
 /* Defines and enums ----------------------------------------------------------*/
 /* Defines */
-#define BIT_POS_TO_MASK(x) (0x01 << x)  /*!< Convert the index of a bit into a mask by left shifting */
-#define BASE_MASK_TO_POS(m, p) (m << p) /*!< Move a mask defined in the LSBs to upper positions by shifting left p bits */
+#define BIT_POS_TO_MASK(x) (0x01 << (x))  /*!< Convert the index of a bit into a mask by left shifting */
+#define BASE_MASK_TO_POS(m, p) ((m) << (p)) /*!< Move a mask defined in the LSBs to upper positions by shifting left p bits */
 #define GET_PIN_IRQN(pin) (pin >= 10 ? EXTI15_10_IRQn : (pin >= 5 ? EXTI9_5_IRQn : (EXTI0_IRQn + pin))) /*!< Compute the IRQ number associated to a GPIO pin */
 
 /* Microcontroller STM32F446RE */

@@ -70,7 +70,7 @@ int main(void)
     }
     else
     {
-        printf("[NEC TESTER] I'm sorry, the repetition has not been detected correctly");
+        printf("[NEC TESTER] I'm sorry, the repetition has not been detected correctly.\n");
     }
 
     /* Test the noise */
